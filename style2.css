@@ -451,9 +451,8 @@
     /* Page2 */
     #page2 {
         padding: 1rem 0;
-        background: url("page2.png") no-repeat top center;
-        background-size: cover;
-        background-position: top center;
+        background: url("page2.png") no-repeat center center;
+        background-size: contain;
     }
 
     #page2 img[src*="page2"] {
@@ -463,9 +462,8 @@
     /* Page3 */
     #page3 {
         padding: 1rem 0;
-        background: url("page3.png") no-repeat top center;
-        background-size: cover;
-        background-position: top center;
+        background: url("page3.png") no-repeat center center;
+        background-size: contain;
     }
 
     #page3 #page3-img {
@@ -475,38 +473,30 @@
     /* Page4 */
     #page4 {
         padding: 1rem 0;
-        background: url("page4.png") no-repeat top center;
-        background-size: cover;
-        background-position: top center;
+        background: url("page4.png") no-repeat center center;
+        background-size: contain;
     }
 
     #page4 img[src*="page4"] {
         display: none;
     }
 
-    /* Buttons Center */
+    /* Buttons in Row */
     .button-container {
-        display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
         gap: 12px;
 
         position: absolute;
-        top: 50%;
+        bottom: 90px;
         left: 50%;
-        transform: translate(-50%, -50%);
+        transform: translateX(-50%);
 
+        top: auto;
         right: auto;
-        bottom: auto;
     }
 }
-
-
-
-
-
-
 
 /* Small Mobiles (max 480px) */
 @media (max-width: 480px) {
