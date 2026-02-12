@@ -1,3 +1,6 @@
+/* =========================
+   GLOBAL RESET
+========================= */
 * {
     margin: 0;
     padding: 0;
@@ -5,134 +8,70 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
 }
 
+/* =========================
+   APP WRAPPER
+========================= */
 #app {
     display: flex;
     flex-direction: column;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+    height: 100vh;
 }
 
-/* Pages */
+/* =========================
+   COMMON PAGES
+========================= */
 #page1, #page2, #page3, #page4 {
     position: relative;
     width: 100%;
     min-height: 100vh;
     border-top: 2px solid black;
     overflow: hidden;
+    padding-bottom: 3rem;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
 }
 
-/* Logo */
+/* =========================
+   FADE SYSTEM (ONLY CONTENT)
+========================= */
+.fade-content {
+    opacity: 0;
+    transform: translateY(80px);
+    transition: opacity 2.8s ease, transform 2.8s ease;
+}
+
+
+.page.active .fade-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================
+   COMMON LOGO
+========================= */
 .logo {
-    position: absolute;
+    position: fixed;
     top: 12px;
     left: 12px;
     width: 130px;
     height: auto;
-    z-index: 10;
+    z-index: 9999;
 }
 
-/* Page1 logo center default state */
-#page1 .logo {
-    top: 20px;
-    left: 50%;
-    width: 120px;
-    opacity: 0;
-    transform: translateX(-50%) translateY(120vh);
-}
-
-/* Page1 logo animation class */
-#page1 .logo.animate {
-    animation: logoSlideUp 1600ms cubic-bezier(.22,.98,.32,1) forwards;
-}
-
-@keyframes logoSlideUp {
-    from {
-        transform: translateX(-50%) translateY(120vh);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(-50%) translateY(0);
-        opacity: 1;
-    }
-}
-
-/* PAGE 1 ANIMATIONS */
-
-/* Hero images fade in from left */
-#page1 .hero.animate-in,
-#page1 > img:not(.logo).animate-in {
-    animation: imageSlideInLeft 1.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-@keyframes imageSlideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-80px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-/* Page1 navbar fade in */
-#page1 .navbar.animate-in {
-    animation: navbarPage1FadeIn 1.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    opacity: 0;
-}
-
-@keyframes navbarPage1FadeIn {
-    from {
-        opacity: 0;
-        transform: translateX(-40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-/* Page1 social icons fade in */
-#page1 .social-icons.animate-in {
-    animation: socialPage1FadeIn 1.4s ease forwards;
-    opacity: 0;
-}
-
-@keyframes socialPage1FadeIn {
-    from {
-        opacity: 0;
-        transform: translateX(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-/* Page1 bottom text animations */
-#page1 #t1.animate-in {
-    animation: textFadeInUp 1.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    opacity: 0;
-}
-
-#page1 #t2.animate-in {
-    animation: textFadeInUp 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards;
-    opacity: 0;
-}
-
-/* Page1 description fade in */
-#page1-description.animate-in {
-    animation: textFadeInUp 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s forwards;
-    opacity: 0;
-}
-
-/* Navbar */
+/* =========================
+   COMMON NAVBAR
+========================= */
 .navbar {
-    position: absolute;
+    position: fixed;
     top: calc(12px + 130px + 1rem);
     left: 3rem;
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    z-index: 9;
+    z-index: 9999;
 }
 
 .navbar a {
@@ -140,34 +79,17 @@
     color: #210505;
     font-size: 14px;
     font-weight: 700;
+    position: relative;
 }
 
-.navbar a:hover {
-    background: #f0f0f0;
-}
-
-/* Page1 navbar custom */
-#page1 .navbar {
-    top: 200px;
-    left: 12px;
-}
-
-#page1 .navbar a {
-    font-size: 18px;
-    color: black;
-    background: none;
-}
-
-#page1 .navbar a:hover {
-    opacity: 0.8;
-}
-
-/* Social Icons */
+/* =========================
+   COMMON SOCIAL ICONS
+========================= */
 .social-icons {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin-top: 4rem;
+    margin-top: 3rem;
     padding-top: 1rem;
     border-top: 1px solid #e0e0e0;
 }
@@ -179,7 +101,6 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    transition: 0.3s ease;
 }
 
 .social-link i {
@@ -191,31 +112,35 @@
     font-weight: 600;
 }
 
-.social-link:hover {
-    color: #22c55e;
+/* =========================
+   DESCRIPTION (FIXED ALWAYS)
+========================= */
+.description {
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    padding: 1rem 0.2rem;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 0.5px;
+    z-index: 9999;
+    margin: 0;
+    color: #210505;
+    background: transparent;
 }
 
-/* Page1 social */
-#page1 .social-icons {
-    margin-top: 2rem;
-    border-top: 1px solid rgba(0, 0, 0, 0.3);
-}
-
-#page1 .social-link {
-    color: black;
-}
-
-#page1 .social-link span {
-    font-size: 12px;
-}
-
-/* Page1 layout */
+/* =====================================================
+   PAGE 1
+===================================================== */
 #page1 {
+    background-color: #c4e4d6;
     display: flex;
     flex-direction: row;
 }
 
-/* Keep page images large but exclude logo */
+/* Page1 Images */
 #page1 > img:not(.logo),
 .hero {
     height: 70vh;
@@ -234,16 +159,30 @@
     filter: grayscale(100%);
 }
 
-/* Page1 bottom text */
+/* Page1 Overlay */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 5;
+}
+
+/* Page1 Bottom Text */
 .page1-bottom-text {
     position: absolute;
-    bottom: 60px;
+    bottom: 90px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 11;
     color: rgb(11, 10, 10);
     text-align: center;
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 1 !important;
+    transform: translateX(-50%) !important;
 }
 
 .page1-bottom-text #t1 {
@@ -256,36 +195,25 @@
     font-weight: 800;
     letter-spacing: 1px;
     text-transform: capitalize;
+    cursor: pointer;
 }
 
-/* Page1 description */
-#page1-description {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 1rem 0.2rem;
-    font-size: 20px;
-    font-weight: 600;
-    text-align: center;
-    letter-spacing: 0.5px;
-    z-index: 7;
-    margin: 0;
-    color: #210505;
-    background: #fffdfd;
-}
-
-/* Page2 image */
+/* =====================================================
+   PAGE 2
+===================================================== */
 #page2 img[src*="page2"] {
     position: absolute;
-    top: 0;
+    top: -6rem;
     right: 80px;
     height: 100vh;
     max-width: 80%;
     object-fit: contain;
+    z-index: 5;
 }
 
-/* Page3 */
+/* =====================================================
+   PAGE 3
+===================================================== */
 #page3 {
     background: #d5e6f3;
 }
@@ -293,44 +221,41 @@
 #page3 .page-img {
     position: absolute;
     right: 0;
-    top: 0;
+    top: -6rem;
     height: 100vh;
     max-width: 80%;
     object-fit: contain;
+    z-index: 5;
 }
 
-/* Page3 logo fix */
-#page3 .logo {
-    width: 130px;
-    height: auto;
-    top: 12px;
-    left: 12px;
-    transform: none;
-    opacity: 1;
-}
-
-/* Page4 */
+/* =====================================================
+   PAGE 4
+===================================================== */
 #page4 {
     background: #d5e6f3;
+    min-height: calc(100vh + 1rem);
 }
 
 #page4 img[src*="page4"] {
     position: absolute;
     right: 0;
-    top: 0;
+    top: -6rem;
     height: 100vh;
     max-width: 80%;
     object-fit: contain;
+    z-index: 5;
 }
 
-/* Buttons */
+/* =====================================================
+   BUTTONS (HOVER SAME AS BEFORE)
+===================================================== */
 .button-container {
     position: absolute;
-    top: 450px;
+    top: 400px;
     right: 120px;
     display: flex;
     gap: 12px;
-    z-index: 8;
+    z-index: 12;
 }
 
 .btn1, .btn2 {
@@ -340,10 +265,43 @@
     font-size: 14px;
     cursor: pointer;
     border: none;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform: translateY(0);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 4rem;
 }
 
-.btn1:hover, .btn2:hover {
-    opacity: 0.85;
+.btn1::before,
+.btn2::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn1:hover,
+.btn2:hover {
+    transform: translateY(-8px) scale(1.08);
+    box-shadow: 0px 20px 40px rgba(34, 197, 94, 0.4);
+}
+
+.btn1:hover::before,
+.btn2:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn1:active,
+.btn2:active {
+    transform: translateY(-2px) scale(0.95);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* Default button colors */
@@ -365,10 +323,20 @@
     margin-top: 12px;
 }
 
+#page3 .btn1:hover {
+    box-shadow: 0px 20px 40px rgba(0, 102, 204, 0.5);
+    background: #0052a3;
+}
+
 #page3 .btn2 {
     color: #0066cc;
     border: 2px solid #0066cc;
     margin-top: 12px;
+}
+
+#page3 .btn2:hover {
+    background: rgba(0, 102, 204, 0.1);
+    box-shadow: 0px 20px 40px rgba(0, 102, 204, 0.3);
 }
 
 /* Page4 custom buttons */
@@ -378,206 +346,49 @@
     margin: 2.3rem 0;
 }
 
+#page4 .btn1:hover {
+    box-shadow: 0px 20px 40px rgba(107, 68, 35, 0.5);
+    background: #553422;
+}
+
 #page4 .btn2 {
     color: #6B4423;
     border: 2px solid #6B4423;
     margin: 2.3rem 0;
 }
 
-/* Description */
-.description {
+#page4 .btn2:hover {
+    background: rgba(107, 68, 35, 0.1);
+    box-shadow: 0px 20px 40px rgba(107, 68, 35, 0.3);
+}
+
+#page4 .button-container {
+    top: 380px;
+}
+
+/* =====================================================
+   PARAGRAPH STYLING (PAGES 2, 3, 4)
+===================================================== */
+.para {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 1rem 0.2rem;
-    font-size: 20px;
-    font-weight: 600;
-    text-align: center;
-    letter-spacing: 0.5px;
-    z-index: 7;
-    margin: 0;
+    width: 30%;
+    right: 50px;
+    top: 480px;
+    z-index: 13;
+    font-size: 14px;
+    line-height: 1.6;
     color: #210505;
-    background: #fffdfd;
 }
 
-/* Page3 description bg */
-#page3 .description {
-    background: #d5e6f3;
-}
-
-/* Page4 description bg */
-#page4 .description {
-    background: #d1e8ec;
-}
-
-.btn1, 
-.btn2 {
-    transition: all 0.35s ease;
-    transform: translateY(0);
-}
-
-/* Hover effect */
-.btn1:hover, 
-.btn2:hover {
-    transform: translateY(-6px) scale(1.05);
-    box-shadow: 0px 12px 25px rgba(37, 24, 24, 0.372);
-}
-
-/* Click effect */
-.btn1:active, 
-.btn2:active {
-    transform: translateY(0px) scale(0.96);
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Entrance animation */
-.button-container {
-    animation: btnFadeUp 1s ease forwards;
-    opacity: 0;
-}
-
-@keyframes btnFadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* PAGE 2, 3, 4 ANIMATIONS */
-
-/* Logo fade in slide down */
-#page2 .logo.animate-in,
-#page3 .logo.animate-in,
-#page4 .logo.animate-in {
-    animation: logoFadeSlide 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-@keyframes logoFadeSlide {
-    from {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Image fade in from right */
-#page2 img[src*="page2"].animate-in,
-#page3 .page-img.animate-in,
-#page4 img[src*="page4"].animate-in {
-    animation: imageSlideInRight 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-@keyframes imageSlideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(100px) scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0) scale(1);
-    }
-}
-
-/* Navbar fade in left */
-#page2 .navbar.animate-in,
-#page3 .navbar.animate-in,
-#page4 .navbar.animate-in {
-    animation: navbarFadeInLeft 1.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-@keyframes navbarFadeInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-/* Buttons staggered animation */
-#page2 .btn1.animate-in,
-#page3 .btn1.animate-in,
-#page4 .btn1.animate-in {
-    animation: btnSlideUp 1.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-#page2 .btn2.animate-in,
-#page3 .btn2.animate-in,
-#page4 .btn2.animate-in {
-    animation: btnSlideUp 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s forwards;
-}
-
-@keyframes btnSlideUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px) scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-/* Description text fade in up */
-#page2 .description.animate-in,
-#page3 .description.animate-in,
-#page4 .description.animate-in {
-    animation: textFadeInUp 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
-    opacity: 0;
-}
-
-@keyframes textFadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Social icons staggered fade in */
-#page2 .social-icons.animate-in,
-#page3 .social-icons.animate-in,
-#page4 .social-icons.animate-in {
-    animation: socialFadeIn 1.4s ease forwards;
-    opacity: 0;
-}
-
-@keyframes socialFadeIn {
-    from {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-/*    mobile responsive adjustments     */
-
-/* Tablets (max 1024px) */
+/* =====================================================
+   RESPONSIVE (TABLETS)
+===================================================== */
 @media (max-width: 1024px) {
-
-    /* Navbar shift */
     .navbar {
         left: 1.5rem;
         gap: 1.5rem;
     }
 
-    /* Page1 layout stacked */
     #page1 {
         flex-direction: column;
     }
@@ -588,32 +399,22 @@
         height: 33vh;
     }
 
-    /* Page1 description */
-    #page1-description {
-        font-size: 16px;
-        padding: 0.8rem 0.2rem;
-    }
-
-    /* Page2 image */
     #page2 img[src*="page2"] {
         right: 0;
         max-width: 95%;
         height: 90vh;
     }
 
-    /* Page3 image */
     #page3 .page-img {
         max-width: 95%;
         height: 90vh;
     }
 
-    /* Page4 image */
     #page4 img[src*="page4"] {
         max-width: 95%;
         height: 90vh;
     }
 
-    /* Buttons position fix */
     .button-container {
         top: 60%;
         right: 50%;
@@ -625,18 +426,16 @@
         font-size: 14px;
     }
 
-    /* Bottom descriptions */
     .description {
         font-size: 16px;
         padding: 0.8rem 0.2rem;
     }
 }
 
-
-
+/* =====================================================
+   RESPONSIVE (MOBILE)
+===================================================== */
 @media (max-width: 768px) {
-
-    /* Page2 */
     #page2 {
         padding: 1rem 0;
         background: url("page2.png") no-repeat center center;
@@ -647,18 +446,12 @@
         display: none;
     }
 
-    /* Page3 */
     #page3 {
         padding: 1rem 0;
         background: url("page3.png") no-repeat center center;
         background-size: contain;
     }
 
-    #page3 #page3-img {
-        display: none;
-    }
-
-    /* Page4 */
     #page4 {
         padding: 1rem 0;
         background: url("page4.png") no-repeat center center;
@@ -669,37 +462,32 @@
         display: none;
     }
 
-    /* Buttons in Row */
     .button-container {
         flex-direction: row;
         justify-content: center;
         align-items: center;
         gap: 12px;
-
         position: absolute;
         bottom: 90px;
         left: 50%;
         transform: translateX(-50%);
-
         top: auto;
         right: auto;
     }
 }
 
-/* Small Mobiles (max 480px) */
+/* =====================================================
+   RESPONSIVE (SMALL MOBILE)
+===================================================== */
 @media (max-width: 480px) {
-
-    /* Logo smaller */
     .logo {
         width: 85px;
     }
 
-    /* Navbar text smaller */
     .navbar a {
         font-size: 12px;
     }
 
-    /* Social icons smaller */
     .social-link i {
         font-size: 14px;
     }
@@ -708,31 +496,21 @@
         font-size: 11px;
     }
 
-    /* Page2/3/4 image */
-    #page2 img[src*="page2"],
-    #page4 img[src*="page4"] {
-        top: 80px;
-        height: 60vh;
-    }
-
     #page3 .page-img {
         top: 80px;
         height: 60vh;
     }
 
-    /* Buttons */
     .btn1, .btn2 {
         width: 160px;
         font-size: 13px;
         padding: 10px;
     }
 
-    /* Bottom text */
     .page1-bottom-text #t2 {
         font-size: 18px;
     }
 
-    #page1-description,
     .description {
         font-size: 12px;
         padding: 0.6rem 0.2rem;
