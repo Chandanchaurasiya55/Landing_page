@@ -1,0 +1,552 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Pages */
+#page1, #page2, #page3, #page4 {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    border-top: 2px solid black;
+    overflow: hidden;
+}
+
+/* Logo */
+.logo {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 130px;
+    height: auto;
+    z-index: 10;
+}
+
+/* Page1 logo center default state */
+#page1 .logo {
+    top: 20px;
+    left: 50%;
+    width: 120px;
+    opacity: 0;
+    transform: translateX(-50%) translateY(120vh);
+}
+
+/* Page1 logo animation class */
+#page1 .logo.animate {
+    animation: logoSlideUp 1600ms cubic-bezier(.22,.98,.32,1) forwards;
+}
+
+@keyframes logoSlideUp {
+    from {
+        transform: translateX(-50%) translateY(120vh);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Navbar */
+.navbar {
+    position: absolute;
+    top: calc(12px + 130px + 1rem);
+    left: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    z-index: 9;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #210505;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.navbar a:hover {
+    background: #f0f0f0;
+}
+
+/* Page1 navbar custom */
+#page1 .navbar {
+    top: 200px;
+    left: 12px;
+}
+
+#page1 .navbar a {
+    font-size: 18px;
+    color: black;
+    background: none;
+}
+
+#page1 .navbar a:hover {
+    opacity: 0.8;
+}
+
+/* Social Icons */
+.social-icons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 4rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.social-link {
+    font-size: 24px;
+    color: #210505;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s ease;
+}
+
+.social-link i {
+    font-size: 18px;
+}
+
+.social-link span {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.social-link:hover {
+    color: #22c55e;
+}
+
+/* Page1 social */
+#page1 .social-icons {
+    margin-top: 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+#page1 .social-link {
+    color: black;
+}
+
+#page1 .social-link span {
+    font-size: 12px;
+}
+
+/* Page1 layout */
+#page1 {
+    display: flex;
+    flex-direction: row;
+}
+
+/* Keep page images large but exclude logo */
+#page1 > img:not(.logo),
+.hero {
+    height: 70vh;
+    width: 33.33%;
+}
+
+#page1 > img:not(.logo) {
+    object-fit: cover;
+    filter: grayscale(100%);
+}
+
+.hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+}
+
+/* Page1 bottom text */
+.page1-bottom-text {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 11;
+    color: rgb(11, 10, 10);
+    text-align: center;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+.page1-bottom-text #t1 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.page1-bottom-text #t2 {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+}
+
+/* Page1 description */
+#page1-description {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 0.2rem;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 0.5px;
+    z-index: 7;
+    margin: 0;
+    color: #210505;
+    background: #fffdfd;
+}
+
+/* Page2 image */
+#page2 img[src*="page2"] {
+    position: absolute;
+    top: 0;
+    right: 80px;
+    height: 100vh;
+    max-width: 80%;
+    object-fit: contain;
+}
+
+/* Page3 */
+#page3 {
+    background: #d5e6f3;
+}
+
+#page3 .page-img {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    max-width: 80%;
+    object-fit: contain;
+}
+
+/* Page3 logo fix */
+#page3 .logo {
+    width: 130px;
+    height: auto;
+    top: 12px;
+    left: 12px;
+    transform: none;
+    opacity: 1;
+}
+
+/* Page4 */
+#page4 {
+    background: #d5e6f3;
+}
+
+#page4 img[src*="page4"] {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    max-width: 80%;
+    object-fit: contain;
+}
+
+/* Buttons */
+.button-container {
+    position: absolute;
+    top: 450px;
+    right: 120px;
+    display: flex;
+    gap: 12px;
+    z-index: 8;
+}
+
+.btn1, .btn2 {
+    width: 140px;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+}
+
+.btn1:hover, .btn2:hover {
+    opacity: 0.85;
+}
+
+/* Default button colors */
+.btn1 {
+    background: #22c55e;
+    color: white;
+}
+
+.btn2 {
+    background: white;
+    color: #22c55e;
+    border: 2px solid #22c55e;
+}
+
+/* Page3 custom buttons */
+#page3 .btn1 {
+    background: #0066cc;
+    border: 2px solid #0066cc;
+    margin-top: 12px;
+}
+
+#page3 .btn2 {
+    color: #0066cc;
+    border: 2px solid #0066cc;
+    margin-top: 12px;
+}
+
+/* Page4 custom buttons */
+#page4 .btn1 {
+    background: #6B4423;
+    border: 2px solid #6B4423;
+    margin: 2.3rem 0;
+}
+
+#page4 .btn2 {
+    color: #6B4423;
+    border: 2px solid #6B4423;
+    margin: 2.3rem 0;
+}
+
+/* Description */
+.description {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 0.2rem;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 0.5px;
+    z-index: 7;
+    margin: 0;
+    color: #210505;
+    background: #fffdfd;
+}
+
+/* Page3 description bg */
+#page3 .description {
+    background: #d5e6f3;
+}
+
+/* Page4 description bg */
+#page4 .description {
+    background: #d1e8ec;
+}
+
+.btn1, 
+.btn2 {
+    transition: all 0.35s ease;
+    transform: translateY(0);
+}
+
+/* Hover effect */
+.btn1:hover, 
+.btn2:hover {
+    transform: translateY(-6px) scale(1.05);
+    box-shadow: 0px 12px 25px rgba(37, 24, 24, 0.372);
+}
+
+/* Click effect */
+.btn1:active, 
+.btn2:active {
+    transform: translateY(0px) scale(0.96);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Entrance animation */
+.button-container {
+    animation: btnFadeUp 1s ease forwards;
+    opacity: 0;
+}
+
+@keyframes btnFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*    mobile responsive adjustments     */
+
+/* Tablets (max 1024px) */
+@media (max-width: 1024px) {
+
+    /* Navbar shift */
+    .navbar {
+        left: 1.5rem;
+        gap: 1.5rem;
+    }
+
+    /* Page1 layout stacked */
+    #page1 {
+        flex-direction: column;
+    }
+
+    #page1 > img:not(.logo),
+    .hero {
+        width: 100%;
+        height: 33vh;
+    }
+
+    /* Page1 description */
+    #page1-description {
+        font-size: 16px;
+        padding: 0.8rem 0.2rem;
+    }
+
+    /* Page2 image */
+    #page2 img[src*="page2"] {
+        right: 0;
+        max-width: 95%;
+        height: 90vh;
+    }
+
+    /* Page3 image */
+    #page3 .page-img {
+        max-width: 95%;
+        height: 90vh;
+    }
+
+    /* Page4 image */
+    #page4 img[src*="page4"] {
+        max-width: 95%;
+        height: 90vh;
+    }
+
+    /* Buttons position fix */
+    .button-container {
+        top: 60%;
+        right: 50%;
+        transform: translateX(50%);
+    }
+
+    .btn1, .btn2 {
+        width: 150px;
+        font-size: 14px;
+    }
+
+    /* Bottom descriptions */
+    .description {
+        font-size: 16px;
+        padding: 0.8rem 0.2rem;
+    }
+}
+
+
+
+@media (max-width: 768px) {
+
+    /* Page2 */
+    #page2 {
+        padding: 1rem 0;
+        background: url("page2.png") no-repeat center center;
+        background-size: contain;
+    }
+
+    #page2 img[src*="page2"] {
+        display: none;
+    }
+
+    /* Page3 */
+    #page3 {
+        padding: 1rem 0;
+        background: url("page3.png") no-repeat center center;
+        background-size: contain;
+    }
+
+    #page3 #page3-img {
+        display: none;
+    }
+
+    /* Page4 */
+    #page4 {
+        padding: 1rem 0;
+        background: url("page4.png") no-repeat center center;
+        background-size: contain;
+    }
+
+    #page4 img[src*="page4"] {
+        display: none;
+    }
+
+    /* Buttons in Row */
+    .button-container {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+
+        position: absolute;
+        bottom: 90px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        top: auto;
+        right: auto;
+    }
+}
+
+/* Small Mobiles (max 480px) */
+@media (max-width: 480px) {
+
+    /* Logo smaller */
+    .logo {
+        width: 85px;
+    }
+
+    /* Navbar text smaller */
+    .navbar a {
+        font-size: 12px;
+    }
+
+    /* Social icons smaller */
+    .social-link i {
+        font-size: 14px;
+    }
+
+    .social-link span {
+        font-size: 11px;
+    }
+
+    /* Page2/3/4 image */
+    #page2 img[src*="page2"],
+    #page4 img[src*="page4"] {
+        top: 80px;
+        height: 60vh;
+    }
+
+    #page3 .page-img {
+        top: 80px;
+        height: 60vh;
+    }
+
+    /* Buttons */
+    .btn1, .btn2 {
+        width: 160px;
+        font-size: 13px;
+        padding: 10px;
+    }
+
+    /* Bottom text */
+    .page1-bottom-text #t2 {
+        font-size: 18px;
+    }
+
+    #page1-description,
+    .description {
+        font-size: 12px;
+        padding: 0.6rem 0.2rem;
+    }
+}
