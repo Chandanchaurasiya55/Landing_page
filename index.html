@@ -1,229 +1,187 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>Chillum Phillum</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=Space+Mono:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link rel="stylesheet" href="style2.css" />
-  </head>
-  <body>
-    <div id="grain"></div>
-    <div id="cur"></div>
-    <div id="cur-ring"></div>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Chillum Phillum</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style2.css">
+</head>
+<body>
+<div id="grain"></div>
+<div id="cur"></div>
+<div id="cur-ring"></div>
 
-    <!-- TOP NAV -->
-    <nav id="topnav">
-      <img class="tl" src="logo.png" alt="Chillum Phillum" />
-      <div class="tnl">
-        <a href="#p1">Home</a>
-        <a href="under-development.html?page=About">About</a>
-        <a href="under-development.html?page=Projects">Projects</a>
-        <a href="under-development.html?page=Contact">Contact</a>
-      </div>
-      <div class="tns">
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-facebook"></i></a>
-      </div>
-    </nav>
+<!-- TOP NAV -->
+<nav id="topnav">
+  <img class="tl" src="logo.png" alt="Chillum Phillum">
+  <div class="tnl">
+    <a href="#p1">Home</a>
+    <a href="under-development.html?page=About">About</a>
+    <a href="under-development.html?page=Projects">Projects</a>
+    <a href="under-development.html?page=Contact">Contact</a>
+  </div>
+  <div class="tns">
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-facebook"></i></a>
+  </div>
+</nav>
 
-    <!-- PAGE DOTS -->
-    <div id="pdots">
-      <div class="pd on" data-t="p1"></div>
-      <div class="pd" data-t="p2"></div>
-      <div class="pd" data-t="p3"></div>
-      <div class="pd" data-t="p4"></div>
+<!-- PAGE DOTS -->
+<div id="pdots">
+  <div class="pd on" data-t="p1"></div>
+  <div class="pd" data-t="p2"></div>
+  <div class="pd" data-t="p3"></div>
+  <div class="pd" data-t="p4"></div>
+</div>
+
+<!-- TICKER -->
+<div id="ticker">
+  <div class="tick-track">
+    <span>Visual Storytelling</span><span class="dot">◆</span>
+    <span>Production</span><span class="dot">◆</span>
+    <span>Film Making</span><span class="dot">◆</span>
+    <span>Photography</span><span class="dot">◆</span>
+    <span>Advertising</span><span class="dot">◆</span>
+    <span>Graphic Design</span><span class="dot">◆</span>
+    <span>Chillum Phillum</span><span class="dot">◆</span>
+    <span>Visual Storytelling</span><span class="dot">◆</span>
+    <span>Production</span><span class="dot">◆</span>
+    <span>Film Making</span><span class="dot">◆</span>
+    <span>Photography</span><span class="dot">◆</span>
+    <span>Advertising</span><span class="dot">◆</span>
+    <span>Graphic Design</span><span class="dot">◆</span>
+    <span>Chillum Phillum</span><span class="dot">◆</span>
+  </div>
+</div>
+
+<!-- SCROLL CONTAINER -->
+<div id="reel">
+
+<!-- ╔═══════ PAGE 1 — HERO ═══════╗ -->
+<section id="p1" class="pg">
+
+  <!-- 3D cube grid -->
+  <div class="cube-grid" id="cubeGrid"></div>
+
+  <!-- film strips -->
+  <div class="filmstrip left">
+    <div class="fs-frame"></div><div class="fs-frame"></div>
+    <div class="fs-frame"></div><div class="fs-frame"></div>
+    <div class="fs-frame"></div><div class="fs-frame"></div>
+    <div class="fs-frame"></div><div class="fs-frame"></div>
+  </div>
+  <div class="filmstrip right">
+    <div class="fs-frame"></div><div class="fs-frame"></div>
+    <div class="fs-frame"></div><div class="fs-frame"></div>
+    <div class="fs-frame"></div><div class="fs-frame"></div>
+    <div class="fs-frame"></div><div class="fs-frame"></div>
+  </div>
+
+  <!-- hero content -->
+  <div class="hero-wrap">
+    <img class="hero-logo" src="logo.png" alt="logo">
+    <p class="hero-eyebrow">Est. &nbsp;·&nbsp; Creative Production Studio</p>
+    <h1 class="hero-h1">
+      WHERE<br><span class="outline">IT IS</span><br>ALWAYS BUZZING
+    </h1>
+    <p class="hero-sub">Film &nbsp;·&nbsp; Production &nbsp;·&nbsp; Advertising &nbsp;·&nbsp; Photography</p>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="sh-line"></div>
+  </div>
+</section>
+
+<!-- ╔═══════ PAGE 2 — PRODUCTION ═══════╗ -->
+<section id="p2" class="pg">
+  <!-- Unsplash: lush production/studio -->
+  <div class="bg-shot">
+    <div class="vignette"></div>
+    <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1600&q=80" alt="Production">
+  </div>
+  <div class="scanlines"></div>
+  <div class="sec-wm">02</div>
+
+  <!-- 3D wireframe shapes -->
+  <div class="pyramid shape"></div>
+  <div class="ring-shape shape">
+    <canvas class="ring-canvas" width="220" height="220"></canvas>
+  </div>
+
+  <!-- FLOATING 3D CARD — LEFT -->
+  <div class="card3d">
+    <span class="c-num">02 — Production</span>
+    <div class="c-line"></div>
+    <h2>Here Production is<br><em>Always Growing</em></h2>
+    <p>We craft visual stories that move people. From concept to final cut, our production house is where bold ideas come alive.</p>
+    <div class="btn-row">
+      <button class="btn btn-primary">Our Projects</button>
+      <button class="btn btn-ghost">Read More</button>
     </div>
-
-    <!-- TICKER -->
-    <div id="ticker">
-      <div class="tick-track">
-        <span>Visual Storytelling</span><span class="dot">◆</span>
-        <span>Production</span><span class="dot">◆</span>
-        <span>Film Making</span><span class="dot">◆</span>
-        <span>Photography</span><span class="dot">◆</span>
-        <span>Advertising</span><span class="dot">◆</span>
-        <span>Graphic Design</span><span class="dot">◆</span>
-        <span>Chillum Phillum</span><span class="dot">◆</span>
-        <span>Visual Storytelling</span><span class="dot">◆</span>
-        <span>Production</span><span class="dot">◆</span>
-        <span>Film Making</span><span class="dot">◆</span>
-        <span>Photography</span><span class="dot">◆</span>
-        <span>Advertising</span><span class="dot">◆</span>
-        <span>Graphic Design</span><span class="dot">◆</span>
-        <span>Chillum Phillum</span><span class="dot">◆</span>
-      </div>
+    <div class="stats">
+      <div><div class="stat-n" data-count="120">0</div><div class="stat-l">Projects</div></div>
+      <div><div class="stat-n" data-count="8">0</div><div class="stat-l">Years</div></div>
+      <div><div class="stat-n" data-count="45">0</div><div class="stat-l">Clients</div></div>
     </div>
+  </div>
+</section>
 
-    <!-- SCROLL CONTAINER -->
-    <div id="reel">
-      <!-- ╔═══════ PAGE 1 — HERO ═══════╗ -->
-      <section id="p1" class="pg">
-        <!-- 3D cube grid -->
-        <div class="cube-grid" id="cubeGrid"></div>
+<!-- ╔═══════ PAGE 3 — FILM MAKING ═══════╗ -->
+<section id="p3" class="pg">
+  <!-- Unsplash: cinematic camera/film -->
+  <div class="bg-shot">
+    <div class="vignette"></div>
+    <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=1600&q=80" alt="Film Making">
+  </div>
+  <div class="scanlines"></div>
+  <div class="sec-wm">03</div>
 
-        <!-- film strips -->
-        <div class="filmstrip left">
-          <div class="fs-frame"></div>
-          <div class="fs-frame"></div>
-          <div class="fs-frame"></div>
-          <div class="fs-frame"></div>
-          <div class="fs-frame"></div>
-          <div class="fs-frame"></div>
-          <div class="fs-frame"></div>
-          <div class="fs-frame"></div>
-        </div>
-        <div class="filmstrip right">
-          <div class="fs-frame"></div>
-          <div class="fs-frame"></div>
-          <div class="fs-frame"></div>
-          <div class="fs-frame"></div>
-          <div class="fs-frame"></div>
-          <div class="fs-frame"></div>
-          <div class="fs-frame"></div>
-          <div class="fs-frame"></div>
-        </div>
+  <div class="pyramid shape"></div>
+  <div class="ring-shape shape"></div>
 
-        <!-- hero content -->
-        <div class="hero-wrap">
-          <img class="hero-logo" src="logo.png" alt="logo" />
-          <p class="hero-eyebrow">
-            Est. &nbsp;·&nbsp; Creative Production Studio
-          </p>
-          <h1 class="hero-h1">
-            WHERE<br /><span class="outline">IT IS</span><br />ALWAYS BUZZING
-          </h1>
-          <p class="hero-sub">
-            Film &nbsp;·&nbsp; Production &nbsp;·&nbsp; Advertising
-            &nbsp;·&nbsp; Photography
-          </p>
-        </div>
-
-        <div class="scroll-hint">
-          <span>Scroll</span>
-          <div class="sh-line"></div>
-        </div>
-      </section>
-
-      <!-- ╔═══════ PAGE 2 — PRODUCTION ═══════╗ -->
-      <section id="p2" class="pg">
-        <!-- Unsplash: lush production/studio -->
-        <div class="bg-shot">
-          <img
-            src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1600&q=80"
-            alt="Production"
-          />
-        </div>
-        <div class="scanlines"></div>
-        <div class="sec-wm">02</div>
-
-        <!-- 3D wireframe shapes -->
-        <div class="pyramid shape"></div>
-        <div class="ring-shape shape">
-          <canvas class="ring-canvas" width="220" height="220"></canvas>
-        </div>
-
-        <!-- FLOATING 3D CARD — LEFT -->
-        <div class="card3d">
-          <span class="c-num">02 — Production</span>
-          <div class="c-line"></div>
-          <h2>Here Production is<br /><em>Always Growing</em></h2>
-          <p>
-            We craft visual stories that move people. From concept to final cut,
-            our production house is where bold ideas come alive.
-          </p>
-          <div class="btn-row">
-            <button class="btn btn-primary">Our Projects</button>
-            <button class="btn btn-ghost">Read More</button>
-          </div>
-          <div class="stats">
-            <div>
-              <div class="stat-n" data-count="120">0</div>
-              <div class="stat-l">Projects</div>
-            </div>
-            <div>
-              <div class="stat-n" data-count="8">0</div>
-              <div class="stat-l">Years</div>
-            </div>
-            <div>
-              <div class="stat-n" data-count="45">0</div>
-              <div class="stat-l">Clients</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ╔═══════ PAGE 3 — FILM MAKING ═══════╗ -->
-      <section id="p3" class="pg">
-        <!-- Unsplash: cinematic camera/film -->
-        <div class="bg-shot">
-          <img
-            src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=1600&q=80"
-            alt="Film Making"
-          />
-        </div>
-        <div class="scanlines"></div>
-        <div class="sec-wm">03</div>
-
-        <div class="pyramid shape"></div>
-        <div class="ring-shape shape"></div>
-
-        <!-- FLOATING 3D CARD — RIGHT -->
-        <div class="card3d">
-          <span class="c-num">03 — Film Making</span>
-          <div class="c-line"></div>
-          <h2>Here Film-Making is<br /><em>Always Flowing</em></h2>
-          <p>
-            Every frame is a brushstroke. Every scene, a world. We bring
-            cinematic vision to life through stories that resonate.
-          </p>
-          <div class="btn-row">
-            <button class="btn btn-primary">Our Projects</button>
-            <button class="btn btn-ghost">Read More</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- ╔═══════ PAGE 4 — ADVERTISING ═══════╗ -->
-      <section id="p4" class="pg">
-        <!-- Unsplash: bold advertising/city -->
-        <div class="bg-shot">
-          <img
-            src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1600&q=80"
-            alt="Advertising"
-          />
-        </div>
-        <div class="scanlines"></div>
-        <div class="sec-wm">04</div>
-
-        <div class="pyramid shape"></div>
-        <div class="ring-shape shape"></div>
-
-        <!-- FLOATING 3D CARD — LEFT -->
-        <div class="card3d">
-          <span class="c-num">04 — Advertising</span>
-          <div class="c-line"></div>
-          <h2>Here Advertising is<br /><em>Always Heightening</em></h2>
-          <p>
-            We don't just sell — we ignite desire. Bold campaigns that cut
-            through the noise and forge connections that last.
-          </p>
-          <div class="btn-row">
-            <button class="btn btn-primary">Our Projects</button>
-            <button class="btn btn-ghost">Read More</button>
-          </div>
-        </div>
-      </section>
+  <!-- FLOATING 3D CARD — RIGHT -->
+  <div class="card3d">
+    <span class="c-num">03 — Film Making</span>
+    <div class="c-line"></div>
+    <h2>Here Film-Making is<br><em>Always Flowing</em></h2>
+    <p>Every frame is a brushstroke. Every scene, a world. We bring cinematic vision to life through stories that resonate.</p>
+    <div class="btn-row">
+      <button class="btn btn-primary">Our Projects</button>
+      <button class="btn btn-ghost">Read More</button>
     </div>
-    <!-- #reel -->
+  </div>
+</section>
 
-  <script src="script.js"></script>
-  </body>
+<!-- ╔═══════ PAGE 4 — ADVERTISING ═══════╗ -->
+<section id="p4" class="pg">
+  <!-- Unsplash: bold advertising/city -->
+  <div class="bg-shot">
+    <div class="vignette"></div>
+    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1600&q=80" alt="Advertising">
+  </div>
+  <div class="scanlines"></div>
+  <div class="sec-wm">04</div>
+
+  <div class="pyramid shape"></div>
+  <div class="ring-shape shape"></div>
+
+  <!-- FLOATING 3D CARD — LEFT -->
+  <div class="card3d">
+    <span class="c-num">04 — Advertising</span>
+    <div class="c-line"></div>
+    <h2>Here Advertising is<br><em>Always Heightening</em></h2>
+    <p>We don't just sell — we ignite desire. Bold campaigns that cut through the noise and forge connections that last.</p>
+    <div class="btn-row">
+      <button class="btn btn-primary">Our Projects</button>
+      <button class="btn btn-ghost">Read More</button>
+    </div>
+  </div>
+</section>
+
+</div><!-- #reel -->
+<script src="script.js"></script>
+</body>
 </html>

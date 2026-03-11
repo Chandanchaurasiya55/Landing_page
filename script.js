@@ -63,19 +63,88 @@ reel.addEventListener("scroll", () => {
   lastScroll = cur;
 });
 
+/* ── CHILD SELECTORS ── */
+const CHILD_SELS = [".c-num", "h2", "p", ".btn-row", ".stats"];
+const LINE_SEL = ".c-line";
+
+function resetChildren(pg) {
+  pg.querySelectorAll(CHILD_SELS.map((s) => ".card3d " + s).join(",")).forEach(
+    (el) => {
+      el.classList.remove("child-enter");
+      el.classList.add("child-hidden");
+    },
+  );
+  const line = pg.querySelector(".card3d .c-line");
+  if (line) {
+    line.classList.remove("child-line-enter");
+    line.classList.add("child-line-hidden");
+  }
+}
+
+function animateChildren(pg) {
+  /* stagger delays — fire AFTER card tumble (2.8s) */
+  const delays = [0, 0.22, 0.44, 0.66, 0.88]; /* offset from 2.9s base */
+  const BASE = 400;
+  pg.querySelectorAll(CHILD_SELS.map((s) => ".card3d " + s).join(",")).forEach(
+    (el, i) => {
+      setTimeout(
+        () => {
+          el.classList.add("child-enter");
+          el.classList.remove("child-hidden");
+        },
+        BASE + delays[i] * 1000,
+      );
+    },
+  );
+  const line = pg.querySelector(".card3d .c-line");
+  if (line) {
+    setTimeout(() => {
+      line.classList.add("child-line-enter");
+      line.classList.remove("child-line-hidden");
+    }, BASE + 120);
+  }
+}
+
 function setActive() {
   const mid = window.innerHeight / 2;
   pages.forEach((pg, i) => {
     const r = pg.getBoundingClientRect();
     const isOn = r.top < mid && r.bottom > mid;
-    pg.classList.toggle("on", isOn);
+    const wasOn = pg.classList.contains("on");
+
+    if (isOn && !wasOn) {
+      /* — page just entered — */
+      const card = pg.querySelector(".card3d");
+      if (card) {
+        /* 1. kill any running animation */
+        card.style.animation = "none";
+        void card.offsetHeight; /* reflow */
+        card.style.animation = "";
+
+        /* 2. hide children instantly */
+        resetChildren(pg);
+      }
+      /* 3. add .on → triggers CSS tumble keyframe */
+      pg.classList.add("on");
+      /* 4. schedule child reveal */
+      animateChildren(pg);
+    } else if (!isOn && wasOn) {
+      /* — page just left — reset for next entry */
+      pg.classList.remove("on");
+      resetChildren(pg);
+    }
+
     if (dots[i]) dots[i].classList.toggle("on", isOn);
   });
 }
 reel.addEventListener("scroll", setActive);
 window.addEventListener("load", () => {
+  /* hide all card children first */
+  pages.forEach((pg) => resetChildren(pg));
+  /* activate page 1 */
   pages[0].classList.add("on");
   dots[0].classList.add("on");
+  /* pages 2/3/4 get child animation on first scroll-in */
 });
 
 /* ── DOT CLICK ── */
@@ -87,22 +156,7 @@ dots.forEach((d) =>
   }),
 );
 
-/* ── 3D CARD MOUSE TILT ── */
-pages.forEach((pg) => {
-  const card = pg.querySelector(".card3d");
-  if (!card) return;
-  pg.addEventListener("mousemove", (e) => {
-    const r = pg.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width - 0.5;
-    const y = (e.clientY - r.top) / r.height - 0.5;
-    const tx = pg.id === "p3" ? -2 : 2;
-    card.style.transform = `translateY(-50%) perspective(1000px) rotateY(${tx + x * 12}deg) rotateX(${-1 + -y * 8}deg)`;
-  });
-  pg.addEventListener("mouseleave", () => {
-    const tx = pg.id === "p3" ? "-2" : 2;
-    card.style.transform = `translateY(-50%) perspective(1000px) rotateY(${tx}deg) rotateX(-1deg)`;
-  });
-});
+/* mouse tilt removed — conflicts with tumble animation */
 
 /* ── STAT COUNTERS ── */
 function countUp(el) {
@@ -229,7 +283,177 @@ reel.addEventListener("scroll", () => {
     if (!img) return;
     const r = pg.getBoundingClientRect();
     const progress = (window.innerHeight / 2 - r.top) / window.innerHeight;
-    const y = progress * 30;
-    img.style.transform = `scale(${pg.classList.contains("on") ? 1.0 : 1.08}) translateY(${y}px)`;
+    const y = progress * 25;
+    if (pg.classList.contains("on")) {
+      img.style.transform = `scale(1.0) translateY(${y}px)`;
+    }
   });
 });
+
+/* ── FLOATING DUST PARTICLES on bg pages ── */
+(function bgParticles() {
+  const configs = [
+    { id: "p2", color: "201,168,76" },
+    { id: "p3", color: "77,166,255" },
+    { id: "p4", color: "232,93,38" },
+  ];
+  configs.forEach(({ id, color }) => {
+    const pg = document.getElementById(id);
+    if (!pg) return;
+
+    const cv = document.createElement("canvas");
+    cv.style.cssText =
+      "position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:6;opacity:0;transition:opacity 2.5s ease 1s;";
+    pg.appendChild(cv);
+    const ctx = cv.getContext("2d");
+
+    /* create particles */
+    let W,
+      H,
+      pts = [];
+    function init() {
+      W = cv.width = pg.offsetWidth;
+      H = cv.height = pg.offsetHeight;
+      pts = Array.from({ length: 55 }, () => ({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.8 + 0.3,
+        vx: (Math.random() - 0.5) * 0.18,
+        vy: (Math.random() - 0.5) * 0.18 - 0.12 /* slight upward drift */,
+        o: Math.random() * 0.5 + 0.1,
+        phase: Math.random() * Math.PI * 2,
+      }));
+    }
+    init();
+    window.addEventListener("resize", init);
+
+    function draw(t) {
+      ctx.clearRect(0, 0, W, H);
+      pts.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0) p.x = W;
+        if (p.x > W) p.x = 0;
+        if (p.y < 0) p.y = H;
+        if (p.y > H) p.y = 0;
+        const pulse = 0.5 + 0.5 * Math.sin(t * 0.0008 + p.phase);
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${color},${p.o * pulse})`;
+        ctx.fill();
+      });
+      /* draw faint connecting lines between nearby particles */
+      for (let i = 0; i < pts.length; i++) {
+        for (let j = i + 1; j < pts.length; j++) {
+          const dx = pts[i].x - pts[j].x,
+            dy = pts[i].y - pts[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 90) {
+            ctx.beginPath();
+            ctx.moveTo(pts[i].x, pts[i].y);
+            ctx.lineTo(pts[j].x, pts[j].y);
+            ctx.strokeStyle = `rgba(${color},${0.04 * (1 - dist / 90)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
+
+    /* show canvas only when page is active */
+    const obs = new MutationObserver(() => {
+      cv.style.opacity = pg.classList.contains("on") ? "1" : "0";
+    });
+    obs.observe(pg, { attributes: true, attributeFilter: ["class"] });
+  });
+})();
+
+/* ── LIGHT STREAK on active bg pages ── */
+(function lightStreak() {
+  const configs = [
+    { id: "p2", color: "201,168,76" },
+    { id: "p3", color: "77,166,255" },
+    { id: "p4", color: "232,93,38" },
+  ];
+  configs.forEach(({ id, color }) => {
+    const pg = document.getElementById(id);
+    if (!pg) return;
+    const cv = document.createElement("canvas");
+    cv.style.cssText =
+      "position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:7;";
+    pg.appendChild(cv);
+    const ctx = cv.getContext("2d");
+    let W,
+      H,
+      streaks = [],
+      lastTime = 0;
+
+    function init() {
+      W = cv.width = pg.offsetWidth;
+      H = cv.height = pg.offsetHeight;
+    }
+    init();
+    window.addEventListener("resize", init);
+
+    function spawnStreak() {
+      /* occasional diagonal light streak across bg */
+      const side = Math.random() > 0.5;
+      streaks.push({
+        x: side ? -100 : W + 100,
+        y: Math.random() * H * 0.6 + H * 0.1,
+        vx: (side ? 1 : -1) * (1.2 + Math.random() * 1.8),
+        vy: (Math.random() - 0.5) * 0.4,
+        len: 80 + Math.random() * 140,
+        o: 0,
+        life: 0,
+        maxLife: 100 + Math.random() * 80,
+      });
+    }
+
+    function draw(ts) {
+      ctx.clearRect(0, 0, W, H);
+      if (!pg.classList.contains("on")) {
+        requestAnimationFrame(draw);
+        return;
+      }
+
+      /* spawn occasionally */
+      if (ts - lastTime > 2800 + Math.random() * 3000) {
+        spawnStreak();
+        lastTime = ts;
+      }
+
+      streaks = streaks.filter((s) => s.life < s.maxLife);
+      streaks.forEach((s) => {
+        s.x += s.vx;
+        s.y += s.vy;
+        s.life++;
+        /* fade in/out */
+        s.o =
+          s.life < 20
+            ? s.life / 20
+            : s.life > s.maxLife - 20
+              ? (s.maxLife - s.life) / 20
+              : 1;
+        const grad = ctx.createLinearGradient(
+          s.x - (s.len * s.vx) / Math.abs(s.vx),
+          s.y,
+          s.x,
+          s.y,
+        );
+        grad.addColorStop(0, `rgba(${color},0)`);
+        grad.addColorStop(1, `rgba(${color},${0.18 * s.o})`);
+        ctx.beginPath();
+        ctx.moveTo(s.x - s.len * (s.vx > 0 ? 1 : -1), s.y);
+        ctx.lineTo(s.x, s.y);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      });
+      requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
+  });
+})();
